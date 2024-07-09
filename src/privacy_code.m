@@ -195,47 +195,65 @@ z_1contr_gyro_lowpass = lowpass(z_1contr_gyro_smooth, Fc, Fs);
 [z_gyro_peak_values, z_gyro_peak_locs] = findpeaks(z_gyro_smooth);
 
 
-% finding peaks on lowpass filter graph
-[x_acc_peak_values_wlowpass, x_acc_peak_locs_wlowpass] = findpeaks(x_acc_lowpass); % headset 
+% finding peaks on lowpass filter graph and their times 
+[x_acc_peak_values_wlowpass, x_acc_peak_locs_wlowpass] = findpeaks(x_acc_lowpass); % headset
+x_acc_peak_time_locs_wlowpass = time_acc(x_acc_peak_locs_wlowpass);
 [y_acc_peak_values_wlowpass, y_acc_peak_locs_wlowpass] = findpeaks(y_acc_lowpass);
+y_acc_peak_time_locs_wlowpass = time_acc(y_acc_peak_locs_wlowpass);
 [z_acc_peak_values_wlowpass, z_acc_peak_locs_wlowpass] = findpeaks(z_acc_lowpass);
+z_acc_peak_time_locs_wlowpass = time_acc(z_acc_peak_locs_wlowpass);
 [x_gyro_peak_values_wlowpass, x_gyro_peak_locs_wlowpass] = findpeaks(x_gyro_lowpass);
+x_gyro_peak_time_locs_wlowpass = time_gyro(x_gyro_peak_locs_wlowpass);
 [y_gyro_peak_values_wlowpass, y_gyro_peak_locs_wlowpass] = findpeaks(y_gyro_lowpass);
+y_gyro_peak_time_locs_wlowpass = time_gyro(y_gyro_peak_locs_wlowpass);
 [z_gyro_peak_values_wlowpass, z_gyro_peak_locs_wlowpass] = findpeaks(z_gyro_lowpass);
+z_gyro_peak_time_locs_wlowpass = time_gyro(z_gyro_peak_locs_wlowpass);
 
-[x_0contr_acc_peak_values_wlowpass, x_0contr_acc_peak_locs_wlowpass] = findpeaks(x_0contr_acc_lowpass); % left controller 
+[x_0contr_acc_peak_values_wlowpass, x_0contr_acc_peak_locs_wlowpass] = findpeaks(x_0contr_acc_lowpass); % left controller
+x_0contr_acc_peak_time_locs_wlowpass = time_acc(x_0contr_acc_peak_locs_wlowpass);
 [y_0contr_acc_peak_values_wlowpass, y_0contr_acc_peak_locs_wlowpass] = findpeaks(y_0contr_acc_lowpass);
+y_0contr_acc_peak_time_locs_wlowpass = time_acc(y_0contr_acc_peak_locs_wlowpass);
 [z_0contr_acc_peak_values_wlowpass, z_0contr_acc_peak_locs_wlowpass] = findpeaks(z_0contr_acc_lowpass);
+z_0contr_acc_peak_time_locs_wlowpass = time_acc(z_0contr_acc_peak_locs_wlowpass);
 [x_0contr_gyro_peak_values_wlowpass, x_0contr_gyro_peak_locs_wlowpass] = findpeaks(x_0contr_gyro_lowpass);
+x_0contr_gyro_peak_time_locs_wlowpass = time_gyro(x_0contr_gyro_peak_locs_wlowpass);
 [y_0contr_gyro_peak_values_wlowpass, y_0contr_gyro_peak_locs_wlowpass] = findpeaks(y_0contr_gyro_lowpass);
+y_0contr_gyro_peak_time_locs_wlowpass = time_gyro(y_0contr_gyro_peak_locs_wlowpass);
 [z_0contr_gyro_peak_values_wlowpass, z_0contr_gyro_peak_locs_wlowpass] = findpeaks(z_0contr_gyro_lowpass);
+z_0contr_gyro_peak_time_locs_wlowpass = time_gyro(z_0contr_gyro_peak_locs_wlowpass);
 
-[x_1contr_acc_peak_values_wlowpass, x_1contr_acc_peak_locs_wlowpass] = findpeaks(x_1contr_acc_lowpass); % right controller 
+[x_1contr_acc_peak_values_wlowpass, x_1contr_acc_peak_locs_wlowpass] = findpeaks(x_1contr_acc_lowpass); % right controller
+x_1contr_acc_peak_time_locs_wlowpass = time_acc(x_1contr_acc_peak_locs_wlowpass);
 [y_1contr_acc_peak_values_wlowpass, y_1contr_acc_peak_locs_wlowpass] = findpeaks(y_1contr_acc_lowpass);
+y_1contr_acc_peak_time_locs_wlowpass = time_acc(y_1contr_acc_peak_locs_wlowpass);
 [z_1contr_acc_peak_values_wlowpass, z_1contr_acc_peak_locs_wlowpass] = findpeaks(z_1contr_acc_lowpass);
+z_1contr_acc_peak_time_locs_wlowpass = time_acc(z_1contr_acc_peak_locs_wlowpass);
 [x_1contr_gyro_peak_values_wlowpass, x_1contr_gyro_peak_locs_wlowpass] = findpeaks(x_1contr_gyro_lowpass);
+x_1contr_gyro_peak_time_locs_wlowpass = time_gyro(x_1contr_gyro_peak_locs_wlowpass);
 [y_1contr_gyro_peak_values_wlowpass, y_1contr_gyro_peak_locs_wlowpass] = findpeaks(y_1contr_gyro_lowpass);
+y_1contr_gyro_peak_time_locs_wlowpass = time_gyro(y_1contr_gyro_peak_locs_wlowpass);
 [z_1contr_gyro_peak_values_wlowpass, z_1contr_gyro_peak_locs_wlowpass] = findpeaks(z_1contr_gyro_lowpass);
+z_1contr_gyro_peak_time_locs_wlowpass = time_gyro(z_1contr_gyro_peak_locs_wlowpass);
 
 %% Graphs using 'smooth', 'lowpass', and 'findpeaks' functions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure; 
 % X-axis accelerometer
 subplot(3,1,1);
-plot(time_acc(x_acc_peak_locs_wlowpass), x_acc_peak_values_wlowpass);
+plot(x_acc_peak_time_locs_wlowpass, x_acc_peak_values_wlowpass);
 title({'Headset Graphs Using "smooth", "lowpass", and "findpeaks" Functions'; 'X-Axis Accelerometer'});
 xlim([0, 20]);
 hold on;
 % Y-axis accelerometer
 subplot(3,1,2);
-plot(time_acc(y_acc_peak_locs_wlowpass), y_acc_peak_values_wlowpass);
+plot(y_acc_peak_time_locs_wlowpass, y_acc_peak_values_wlowpass);
 ylabel('\bf{Acc (m/s^2)}');
 title('Y-Axis Accelerometer');
 xlim([0, 20]);
 hold on;
 % Z-axis accelerometer
 subplot(3,1,3);
-plot(time_acc(z_acc_peak_locs_wlowpass), z_acc_peak_values_wlowpass);
+plot(z_acc_peak_time_locs_wlowpass, z_acc_peak_values_wlowpass);
 title('Z-Axis Accelerometer');
 xlim([0, 20]);
 xlabel('\bf{Time (seconds)}');
@@ -243,20 +261,20 @@ xlabel('\bf{Time (seconds)}');
 figure; 
 % X-axis gyroscope
 subplot(3,1,1);
-plot(time_gyro(x_gyro_peak_locs_wlowpass), x_gyro_peak_values_wlowpass);
+plot(x_gyro_peak_time_locs_wlowpass, x_gyro_peak_values_wlowpass);
 title({'Headset Graphs Using "smooth", "lowpass", and "findpeaks" Functions';'X-Axis Gyroscope'});
 xlim([0, 20]);
 hold on;
 % Y-axis gyroscope
 subplot(3,1,2);
-plot(time_gyro(y_gyro_peak_locs_wlowpass), y_gyro_peak_values_wlowpass);
+plot(y_gyro_peak_time_locs_wlowpass, y_gyro_peak_values_wlowpass);
 ylabel('\bf{Ang (deg/s)}');
 title('Y-Axis Gyroscope');
 xlim([0, 20]);
 hold on;
 % Z-axis gyroscope
 subplot(3,1,3);
-plot(time_gyro(z_gyro_peak_locs_wlowpass), z_gyro_peak_values_wlowpass);
+plot(z_gyro_peak_time_locs_wlowpass, z_gyro_peak_values_wlowpass);
 title('Z-Axis Gyroscope');
 xlim([0, 20]);
 xlabel('\bf{Time (seconds)}');
@@ -264,20 +282,20 @@ xlabel('\bf{Time (seconds)}');
 figure; 
 % X-axis accelerometer
 subplot(3,1,1);
-plot(time_0contr_acc(x_0contr_acc_peak_locs_wlowpass), x_0contr_acc_peak_values_wlowpass);
+plot(x_0contr_acc_peak_time_locs_wlowpass, x_0contr_acc_peak_values_wlowpass);
 title({'Left Controller Graphs Using "smooth", "lowpass", and "findpeaks" Functions'; 'X-Axis Accelerometer'});
 xlim([0, 20]);
 hold on;
 % Y-axis accelerometer
 subplot(3,1,2);
-plot(time_0contr_acc(y_0contr_acc_peak_locs_wlowpass), y_0contr_acc_peak_values_wlowpass);
+plot(y_0contr_acc_peak_time_locs_wlowpass, y_0contr_acc_peak_values_wlowpass);
 ylabel('\bf{Acc (m/s^2)}');
 title('Y-Axis Accelerometer');
 xlim([0, 20]);
 hold on;
 % Z-axis accelerometer
 subplot(3,1,3);
-plot(time_0contr_acc(z_0contr_acc_peak_locs_wlowpass), z_0contr_acc_peak_values_wlowpass);
+plot(z_0contr_acc_peak_time_locs_wlowpass, z_0contr_acc_peak_values_wlowpass);
 title('Z-Axis Accelerometer');
 xlim([0, 20]);
 xlabel('\bf{Time (seconds)}');
@@ -285,20 +303,20 @@ xlabel('\bf{Time (seconds)}');
 figure; 
 % X-axis gyroscope
 subplot(3,1,1);
-plot(time_0contr_gyro(x_0contr_gyro_peak_locs_wlowpass), x_0contr_gyro_peak_values_wlowpass);
+plot(x_0contr_gyro_peak_time_locs_wlowpass, x_0contr_gyro_peak_values_wlowpass);
 title({'Left Controller Graphs Using "smooth", "lowpass", and "findpeaks" Functions'; 'X-Axis Gyroscope'});
 xlim([0, 20]);
 hold on;
 % Y-axis gyroscope
 subplot(3,1,2);
-plot(time_0contr_gyro(y_0contr_gyro_peak_locs_wlowpass), y_0contr_gyro_peak_values_wlowpass);
+plot(y_0contr_gyro_peak_time_locs_wlowpass, y_0contr_gyro_peak_values_wlowpass);
 ylabel('\bf{Ang (deg/s)}');
 title('Y-Axis Gyroscope');
 xlim([0, 20]);
 hold on;
 % Z-axis gyroscope
 subplot(3,1,3);
-plot(time_0contr_gyro(z_0contr_gyro_peak_locs_wlowpass), z_0contr_gyro_peak_values_wlowpass);
+plot(z_0contr_gyro_peak_time_locs_wlowpass, z_0contr_gyro_peak_values_wlowpass);
 title('Z-Axis Gyroscope');
 xlim([0, 20]);
 xlabel('\bf{Time (seconds)}');
@@ -306,20 +324,20 @@ xlabel('\bf{Time (seconds)}');
 figure; 
 % X-axis accelerometer
 subplot(3,1,1);
-plot(time_1contr_acc(x_1contr_acc_peak_locs_wlowpass), x_1contr_acc_peak_values_wlowpass);
+plot(x_1contr_acc_peak_time_locs_wlowpass, x_1contr_acc_peak_values_wlowpass);
 title({'Right controller Graphs Using "smooth", "lowpass", and "findpeaks" Functions'; 'X-Axis Accelerometer'});
 xlim([0, 20]);
 hold on;
 % Y-axis accelerometer
 subplot(3,1,2);
-plot(time_1contr_acc(y_1contr_acc_peak_locs_wlowpass), y_1contr_acc_peak_values_wlowpass);
+plot(y_1contr_acc_peak_time_locs_wlowpass, y_1contr_acc_peak_values_wlowpass);
 ylabel('\bf{Acc (m/s^2)}');
 title('Y-Axis Accelerometer');
 xlim([0, 20]);
 hold on;
 % Z-axis accelerometer
 subplot(3,1,3);
-plot(time_1contr_acc(z_1contr_acc_peak_locs_wlowpass), z_1contr_acc_peak_values_wlowpass);
+plot(z_1contr_acc_peak_time_locs_wlowpass, z_1contr_acc_peak_values_wlowpass);
 title('Z-Axis Accelerometer');
 xlim([0, 20]);
 xlabel('\bf{Time (seconds)}');
@@ -327,27 +345,27 @@ xlabel('\bf{Time (seconds)}');
 figure; 
 % X-axis gyroscope
 subplot(3,1,1);
-plot(time_1contr_gyro(x_1contr_gyro_peak_locs_wlowpass), x_1contr_gyro_peak_values_wlowpass);
+plot(x_1contr_gyro_peak_time_locs_wlowpass, x_1contr_gyro_peak_values_wlowpass);
 title({'Right Controller Graphs Using "smooth", "lowpass", and "findpeaks" Functions'; 'X-Axis Gyroscope'});
 xlim([0, 20]);
 hold on;
 % Y-axis gyroscope
 subplot(3,1,2);
-plot(time_1contr_gyro(y_1contr_gyro_peak_locs_wlowpass), y_1contr_gyro_peak_values_wlowpass);
+plot(y_1contr_gyro_peak_time_locs_wlowpass, y_1contr_gyro_peak_values_wlowpass);
 ylabel('\bf{Ang (deg/s)}');
 title('Y-Axis Gyroscope');
 xlim([0, 20]);
 hold on;
 % Z-axis gyroscope
 subplot(3,1,3);
-plot(time_1contr_gyro(z_1contr_gyro_peak_locs_wlowpass), z_1contr_gyro_peak_values_wlowpass);
+plot(z_1contr_gyro_peak_time_locs_wlowpass, z_1contr_gyro_peak_values_wlowpass);
 title('Z-Axis Gyroscope');
 xlim([0, 20]);
 xlabel('\bf{Time (seconds)}');
 
 %% 3D Acceleration Visualization 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% New Part: Integrate Gyroscope Data to Get Orientation
+% New Part: Integrate Acceleration Data to Get Orientation
 dt = 1 / Fs;
 position = zeros(length(time_acc), 3); % head
 position_contr = zeros(length(time_0contr_acc), 3); % left
@@ -384,8 +402,7 @@ filtered_time_acc = time_acc(selected_indices);
 
 % Plot the 3D trajectory with a color gradient representing time
 figure;
-scatter3(filtered_position(:, 1), ...
-    filtered_position(:, 2), filtered_position(:, 3), 3, filtered_time_acc, 'filled');
+scatter3(filtered_position(:, 1), filtered_position(:, 2), filtered_position(:, 3), 3, filtered_time_acc, 'filled');
 title('HMD 3D Visual From Accelerometer Data');
 xlabel('X Position');
 ylabel('Y Position');
@@ -397,7 +414,7 @@ cb.Label.String = 'Time (seconds)';
 % Plot the 3D trajectory with a color gradient representing time
 figure;
 scatter3(filtered_position_contr(:, 1), filtered_position_contr(:, 2), filtered_position_contr(:, 3), 3, filtered_time_acc, 'filled');
-title('Right Controller 3D Visual From Accelerometer Data');
+title('Left Controller 3D Visual From Accelerometer Data');
 xlabel('X Position');
 ylabel('Y Position');
 zlabel('Z Position');
@@ -408,12 +425,12 @@ cb.Label.String = 'Time (seconds)';
 % Plot the 3D trajectory with a color gradient representing time
 figure;
 scatter3(filtered_position_contr_other(:, 1), filtered_position_contr_other(:, 2), filtered_position_contr_other(:, 3), 3, filtered_time_acc, 'filled');
-title('Left Controller 3D Visual From Accelerometer Data');
+title('Right Controller 3D Visual From Accelerometer Data');
 xlabel('X Position');
 ylabel('Y Position');
 zlabel('Z Position');
 cb = colorbar('eastoutside');
-colormap(jet);
+colormap(jet); 
 cb.Label.String = 'Time (seconds)';
 
 %% MATLAB data to CSV for Python
@@ -427,25 +444,70 @@ csvwrite([output_folder '0contr_gyro_data.csv'], [time_0contr_gyro, x_0contr_gyr
 csvwrite([output_folder '1contr_acc_data.csv'], [time_1contr_acc, x_1contr_acc_lowpass, y_1contr_acc_lowpass, z_1contr_acc_lowpass]); % right controller acc 
 csvwrite([output_folder '1contr_gyro_data.csv'], [time_1contr_gyro, x_1contr_gyro_lowpass, y_1contr_gyro_lowpass, z_1contr_gyro_lowpass]); % right controller gyro
 
-% Extract peak values and their corresponding time values
-x_acc_peak_times_wlowpass = time_acc(x_acc_peak_locs_wlowpass);
-y_acc_peak_times_wlowpass = time_acc(y_acc_peak_locs_wlowpass);
-z_acc_peak_times_wlowpass = time_acc(z_acc_peak_locs_wlowpass);
-
 % Ensure all arrays have the same length by trimming the longest arrays
-min_length = min([length(x_acc_peak_times_wlowpass), length(y_acc_peak_times_wlowpass), length(z_acc_peak_times_wlowpass)]);
-x_acc_peak_times_wlowpass = x_acc_peak_times_wlowpass(1:min_length);
-y_acc_peak_times_wlowpass = y_acc_peak_times_wlowpass(1:min_length);
-z_acc_peak_times_wlowpass = z_acc_peak_times_wlowpass(1:min_length);
-x_acc_peak_values_wlowpass = x_acc_peak_values_wlowpass(1:min_length);
-y_acc_peak_values_wlowpass = y_acc_peak_values_wlowpass(1:min_length);
-z_acc_peak_values_wlowpass = z_acc_peak_values_wlowpass(1:min_length);
+acc_min_length = min([length(x_acc_peak_time_locs_wlowpass), length(y_acc_peak_time_locs_wlowpass), length(z_acc_peak_time_locs_wlowpass)]);
+x_acc_peak_time_locs_wlowpass = x_acc_peak_time_locs_wlowpass(1:acc_min_length);
+y_acc_peak_time_locs_wlowpass = y_acc_peak_time_locs_wlowpass(1:acc_min_length);
+z_acc_peak_time_locs_wlowpass = z_acc_peak_time_locs_wlowpass(1:acc_min_length);
+x_acc_peak_values_wlowpass = x_acc_peak_values_wlowpass(1:acc_min_length);
+y_acc_peak_values_wlowpass = y_acc_peak_values_wlowpass(1:acc_min_length);
+z_acc_peak_values_wlowpass = z_acc_peak_values_wlowpass(1:acc_min_length);
+
+gyro_min_length = min([length(x_gyro_peak_time_locs_wlowpass), length(y_gyro_peak_time_locs_wlowpass), length(z_gyro_peak_time_locs_wlowpass)]);
+x_gyro_peak_time_locs_wlowpass = x_gyro_peak_time_locs_wlowpass(1:gyro_min_length);
+y_gyro_peak_time_locs_wlowpass = y_gyro_peak_time_locs_wlowpass(1:gyro_min_length);
+z_gyro_peak_time_locs_wlowpass = z_gyro_peak_time_locs_wlowpass(1:gyro_min_length);
+x_gyro_peak_values_wlowpass = x_gyro_peak_values_wlowpass(1:gyro_min_length);
+y_gyro_peak_values_wlowpass = y_gyro_peak_values_wlowpass(1:gyro_min_length);
+z_gyro_peak_values_wlowpass = z_gyro_peak_values_wlowpass(1:gyro_min_length);
+
+left_contr_acc_min_length = min([length(x_0contr_acc_peak_time_locs_wlowpass), length(y_0contr_acc_peak_time_locs_wlowpass), length(z_0contr_acc_peak_time_locs_wlowpass)]);
+x_0contr_acc_peak_time_locs_wlowpass = x_0contr_acc_peak_time_locs_wlowpass(1:left_contr_acc_min_length);
+y_0contr_acc_peak_time_locs_wlowpass = y_0contr_acc_peak_time_locs_wlowpass(1:left_contr_acc_min_length);
+z_0contr_acc_peak_time_locs_wlowpass = z_0contr_acc_peak_time_locs_wlowpass(1:left_contr_acc_min_length);
+x_0contr_acc_peak_values_wlowpass = x_0contr_acc_peak_values_wlowpass(1:left_contr_acc_min_length);
+y_0contr_acc_peak_values_wlowpass = y_0contr_acc_peak_values_wlowpass(1:left_contr_acc_min_length);
+z_0contr_acc_peak_values_wlowpass = z_0contr_acc_peak_values_wlowpass(1:left_contr_acc_min_length);
+
+left_contr_gyro_min_length = min([length(x_0contr_gyro_peak_time_locs_wlowpass), length(y_0contr_gyro_peak_time_locs_wlowpass), length(z_0contr_gyro_peak_time_locs_wlowpass)]);
+x_0contr_gyro_peak_time_locs_wlowpass = x_0contr_gyro_peak_time_locs_wlowpass(1:left_contr_gyro_min_length);
+y_0contr_gyro_peak_time_locs_wlowpass = y_0contr_gyro_peak_time_locs_wlowpass(1:left_contr_gyro_min_length);
+z_0contr_gyro_peak_time_locs_wlowpass = z_0contr_gyro_peak_time_locs_wlowpass(1:left_contr_gyro_min_length);
+x_0contr_gyro_peak_values_wlowpass = x_0contr_gyro_peak_values_wlowpass(1:left_contr_gyro_min_length);
+y_0contr_gyro_peak_values_wlowpass = y_0contr_gyro_peak_values_wlowpass(1:left_contr_gyro_min_length);
+z_0contr_gyro_peak_values_wlowpass = z_0contr_gyro_peak_values_wlowpass(1:left_contr_gyro_min_length);
+
+right_contr_acc_min_length = min([length(x_1contr_acc_peak_time_locs_wlowpass), length(y_1contr_acc_peak_time_locs_wlowpass), length(z_1contr_acc_peak_time_locs_wlowpass)]);
+x_1contr_acc_peak_time_locs_wlowpass = x_1contr_acc_peak_time_locs_wlowpass(1:right_contr_acc_min_length);
+y_1contr_acc_peak_time_locs_wlowpass = y_1contr_acc_peak_time_locs_wlowpass(1:right_contr_acc_min_length);
+z_1contr_acc_peak_time_locs_wlowpass = z_1contr_acc_peak_time_locs_wlowpass(1:right_contr_acc_min_length);
+x_1contr_acc_peak_values_wlowpass = x_1contr_acc_peak_values_wlowpass(1:right_contr_acc_min_length);
+y_1contr_acc_peak_values_wlowpass = y_1contr_acc_peak_values_wlowpass(1:right_contr_acc_min_length);
+z_1contr_acc_peak_values_wlowpass = z_1contr_acc_peak_values_wlowpass(1:right_contr_acc_min_length);
+
+right_contr_gyro_min_length = min([length(x_1contr_gyro_peak_time_locs_wlowpass), length(y_1contr_gyro_peak_time_locs_wlowpass), length(z_1contr_gyro_peak_time_locs_wlowpass)]);
+x_1contr_gyro_peak_time_locs_wlowpass = x_1contr_gyro_peak_time_locs_wlowpass(1:right_contr_gyro_min_length);
+y_1contr_gyro_peak_time_locs_wlowpass = y_1contr_gyro_peak_time_locs_wlowpass(1:right_contr_gyro_min_length);
+z_1contr_gyro_peak_time_locs_wlowpass = z_1contr_gyro_peak_time_locs_wlowpass(1:right_contr_gyro_min_length);
+x_1contr_gyro_peak_values_wlowpass = x_1contr_gyro_peak_values_wlowpass(1:right_contr_gyro_min_length);
+y_1contr_gyro_peak_values_wlowpass = y_1contr_gyro_peak_values_wlowpass(1:right_contr_gyro_min_length);
+z_1contr_gyro_peak_values_wlowpass = z_1contr_gyro_peak_values_wlowpass(1:right_contr_gyro_min_length);
 
 % Combine the time and peak values into a single matrix
-peak_data_matrix = [x_acc_peak_times_wlowpass, x_acc_peak_values_wlowpass, y_acc_peak_values_wlowpass, z_acc_peak_values_wlowpass];
+acc_peak_data_matrix = [x_acc_peak_time_locs_wlowpass, x_acc_peak_values_wlowpass, y_acc_peak_values_wlowpass, z_acc_peak_values_wlowpass];
+gyro_peak_data_matrix = [x_gyro_peak_time_locs_wlowpass, x_gyro_peak_values_wlowpass, y_gyro_peak_values_wlowpass, z_gyro_peak_values_wlowpass];
+left_contr_acc_peak_data_matrix = [x_0contr_acc_peak_time_locs_wlowpass, x_0contr_acc_peak_values_wlowpass, y_0contr_acc_peak_values_wlowpass, z_0contr_acc_peak_values_wlowpass];
+left_contr_gyro_peak_data_matrix = [x_0contr_gyro_peak_time_locs_wlowpass, x_0contr_gyro_peak_values_wlowpass, y_0contr_gyro_peak_values_wlowpass, z_0contr_gyro_peak_values_wlowpass];
+right_contr_acc_peak_data_matrix = [x_1contr_acc_peak_time_locs_wlowpass, x_1contr_acc_peak_values_wlowpass, y_1contr_acc_peak_values_wlowpass, z_1contr_acc_peak_values_wlowpass];
+right_contr_gyro_peak_data_matrix = [x_1contr_gyro_peak_time_locs_wlowpass, x_1contr_gyro_peak_values_wlowpass, y_1contr_gyro_peak_values_wlowpass, z_1contr_gyro_peak_values_wlowpass];
 
 % Write the matrix to a CSV file
-csvwrite([output_folder 'headset_acceleration_peak_data.csv'], peak_data_matrix);
+csvwrite([output_folder 'headset_acceleration_new_peak_data.csv'], acc_peak_data_matrix);
+csvwrite([output_folder 'headset_gyroscope_new_peak_data.csv'], gyro_peak_data_matrix);
+csvwrite([output_folder 'left_contr_acceleration_new_peak_data.csv'], left_contr_acc_peak_data_matrix);
+csvwrite([output_folder 'left_contr_gyroscope_new_peak_data.csv'], left_contr_gyro_peak_data_matrix);
+csvwrite([output_folder 'right_contr_acceleration_new_peak_data.csv'], right_contr_acc_peak_data_matrix);
+csvwrite([output_folder 'right_contr_gyroscope_new_peak_data.csv'], right_contr_gyro_peak_data_matrix);
 %%
 
 
@@ -456,7 +518,7 @@ csvwrite([output_folder 'headset_acceleration_peak_data.csv'], peak_data_matrix)
 
 
 
-
+%{
 %% Graphs using 'smooth' and 'lowpass' functions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure;
@@ -501,7 +563,7 @@ title('Z-Axis Gyroscope');
 xlim([0, 20]);
 xlabel('\bf{Time (seconds)}');
 %%
-
+%}
 
 
 
