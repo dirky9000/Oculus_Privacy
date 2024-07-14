@@ -2,17 +2,18 @@ clc; close all; clear;
 %% The name of the data file and folder
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 file = 'trial17.txt';  
-folder = ['C:\Users\dirky\Desktop\OculusNew\Oculus\VrSamples\VrCubeWorld_NativeActivity\Projects\Android\side_raise\']; 
+input_folder = 'C:\Users\dirky\Desktop\OculusNew\Oculus\VrSamples\VrCubeWorld_NativeActivity\Projects\Android\WINLAB\motion_data\raw_oculus_data\arm\side_raise\';
+output_folder = 'C:\Users\dirky\Desktop\OculusNew\Oculus\VrSamples\VrCubeWorld_NativeActivity\Projects\Android\WINLAB\motion_data\csv_oculus_data\prac\arm\';
 Fs = 1000;
 Fc = 30; % Cutoff frequency for lowpass filter 
 format longG
 
 start_index = 1;
-end_index = 8180;
+end_index = 6205;
 
 %% Extract motion sensor data 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-filename = [folder file];  
+filename = [input_folder file];  
 fid=fopen(filename);
 tline = fgetl(fid);
 
@@ -139,7 +140,6 @@ num_data_pts_1contr_gyro = length(time_1contr_gyro);
 
 %% Noise removing Functions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 % smooth function 
 x_acc_smooth = smooth(x_acc); % headset 
 y_acc_smooth = smooth(y_acc);
@@ -196,45 +196,45 @@ z_1contr_gyro_lowpass = lowpass(z_1contr_gyro_smooth, Fc, Fs);
 
 
 % finding peaks on lowpass filter graph and their times 
-[x_acc_peak_values_wlowpass, x_acc_peak_locs_wlowpass] = findpeaks(x_acc_lowpass); % headset
+[x_acc_peak_values_wlowpass, x_acc_peak_locs_wlowpass] = findpeaks(x_acc_lowpass); % headset acc
 x_acc_peak_time_locs_wlowpass = time_acc(x_acc_peak_locs_wlowpass);
 [y_acc_peak_values_wlowpass, y_acc_peak_locs_wlowpass] = findpeaks(y_acc_lowpass);
 y_acc_peak_time_locs_wlowpass = time_acc(y_acc_peak_locs_wlowpass);
 [z_acc_peak_values_wlowpass, z_acc_peak_locs_wlowpass] = findpeaks(z_acc_lowpass);
 z_acc_peak_time_locs_wlowpass = time_acc(z_acc_peak_locs_wlowpass);
-[x_gyro_peak_values_wlowpass, x_gyro_peak_locs_wlowpass] = findpeaks(x_gyro_lowpass);
+[x_gyro_peak_values_wlowpass, x_gyro_peak_locs_wlowpass] = findpeaks(x_gyro_lowpass); % headset gyro
 x_gyro_peak_time_locs_wlowpass = time_gyro(x_gyro_peak_locs_wlowpass);
 [y_gyro_peak_values_wlowpass, y_gyro_peak_locs_wlowpass] = findpeaks(y_gyro_lowpass);
 y_gyro_peak_time_locs_wlowpass = time_gyro(y_gyro_peak_locs_wlowpass);
 [z_gyro_peak_values_wlowpass, z_gyro_peak_locs_wlowpass] = findpeaks(z_gyro_lowpass);
 z_gyro_peak_time_locs_wlowpass = time_gyro(z_gyro_peak_locs_wlowpass);
 
-[x_0contr_acc_peak_values_wlowpass, x_0contr_acc_peak_locs_wlowpass] = findpeaks(x_0contr_acc_lowpass); % left controller
-x_0contr_acc_peak_time_locs_wlowpass = time_acc(x_0contr_acc_peak_locs_wlowpass);
+[x_0contr_acc_peak_values_wlowpass, x_0contr_acc_peak_locs_wlowpass] = findpeaks(x_0contr_acc_lowpass); % left contr acc
+x_0contr_acc_peak_time_locs_wlowpass = time_0contr_acc(x_0contr_acc_peak_locs_wlowpass);
 [y_0contr_acc_peak_values_wlowpass, y_0contr_acc_peak_locs_wlowpass] = findpeaks(y_0contr_acc_lowpass);
-y_0contr_acc_peak_time_locs_wlowpass = time_acc(y_0contr_acc_peak_locs_wlowpass);
+y_0contr_acc_peak_time_locs_wlowpass = time_0contr_acc(y_0contr_acc_peak_locs_wlowpass);
 [z_0contr_acc_peak_values_wlowpass, z_0contr_acc_peak_locs_wlowpass] = findpeaks(z_0contr_acc_lowpass);
-z_0contr_acc_peak_time_locs_wlowpass = time_acc(z_0contr_acc_peak_locs_wlowpass);
-[x_0contr_gyro_peak_values_wlowpass, x_0contr_gyro_peak_locs_wlowpass] = findpeaks(x_0contr_gyro_lowpass);
-x_0contr_gyro_peak_time_locs_wlowpass = time_gyro(x_0contr_gyro_peak_locs_wlowpass);
+z_0contr_acc_peak_time_locs_wlowpass = time_0contr_acc(z_0contr_acc_peak_locs_wlowpass);
+[x_0contr_gyro_peak_values_wlowpass, x_0contr_gyro_peak_locs_wlowpass] = findpeaks(x_0contr_gyro_lowpass); % left contr gyro
+x_0contr_gyro_peak_time_locs_wlowpass = time_0contr_gyro(x_0contr_gyro_peak_locs_wlowpass);
 [y_0contr_gyro_peak_values_wlowpass, y_0contr_gyro_peak_locs_wlowpass] = findpeaks(y_0contr_gyro_lowpass);
-y_0contr_gyro_peak_time_locs_wlowpass = time_gyro(y_0contr_gyro_peak_locs_wlowpass);
+y_0contr_gyro_peak_time_locs_wlowpass = time_0contr_gyro(y_0contr_gyro_peak_locs_wlowpass);
 [z_0contr_gyro_peak_values_wlowpass, z_0contr_gyro_peak_locs_wlowpass] = findpeaks(z_0contr_gyro_lowpass);
-z_0contr_gyro_peak_time_locs_wlowpass = time_gyro(z_0contr_gyro_peak_locs_wlowpass);
+z_0contr_gyro_peak_time_locs_wlowpass = time_0contr_gyro(z_0contr_gyro_peak_locs_wlowpass);
 
-[x_1contr_acc_peak_values_wlowpass, x_1contr_acc_peak_locs_wlowpass] = findpeaks(x_1contr_acc_lowpass); % right controller
-x_1contr_acc_peak_time_locs_wlowpass = time_acc(x_1contr_acc_peak_locs_wlowpass);
+[x_1contr_acc_peak_values_wlowpass, x_1contr_acc_peak_locs_wlowpass] = findpeaks(x_1contr_acc_lowpass); % right contr acc
+x_1contr_acc_peak_time_locs_wlowpass = time_1contr_acc(x_1contr_acc_peak_locs_wlowpass);
 [y_1contr_acc_peak_values_wlowpass, y_1contr_acc_peak_locs_wlowpass] = findpeaks(y_1contr_acc_lowpass);
-y_1contr_acc_peak_time_locs_wlowpass = time_acc(y_1contr_acc_peak_locs_wlowpass);
+y_1contr_acc_peak_time_locs_wlowpass = time_1contr_acc(y_1contr_acc_peak_locs_wlowpass);
 [z_1contr_acc_peak_values_wlowpass, z_1contr_acc_peak_locs_wlowpass] = findpeaks(z_1contr_acc_lowpass);
-z_1contr_acc_peak_time_locs_wlowpass = time_acc(z_1contr_acc_peak_locs_wlowpass);
-[x_1contr_gyro_peak_values_wlowpass, x_1contr_gyro_peak_locs_wlowpass] = findpeaks(x_1contr_gyro_lowpass);
-x_1contr_gyro_peak_time_locs_wlowpass = time_gyro(x_1contr_gyro_peak_locs_wlowpass);
+z_1contr_acc_peak_time_locs_wlowpass = time_1contr_acc(z_1contr_acc_peak_locs_wlowpass);
+[x_1contr_gyro_peak_values_wlowpass, x_1contr_gyro_peak_locs_wlowpass] = findpeaks(x_1contr_gyro_lowpass); % right contr gyro
+x_1contr_gyro_peak_time_locs_wlowpass = time_1contr_gyro(x_1contr_gyro_peak_locs_wlowpass);
 [y_1contr_gyro_peak_values_wlowpass, y_1contr_gyro_peak_locs_wlowpass] = findpeaks(y_1contr_gyro_lowpass);
-y_1contr_gyro_peak_time_locs_wlowpass = time_gyro(y_1contr_gyro_peak_locs_wlowpass);
+y_1contr_gyro_peak_time_locs_wlowpass = time_1contr_gyro(y_1contr_gyro_peak_locs_wlowpass);
 [z_1contr_gyro_peak_values_wlowpass, z_1contr_gyro_peak_locs_wlowpass] = findpeaks(z_1contr_gyro_lowpass);
-z_1contr_gyro_peak_time_locs_wlowpass = time_gyro(z_1contr_gyro_peak_locs_wlowpass);
-
+z_1contr_gyro_peak_time_locs_wlowpass = time_1contr_gyro(z_1contr_gyro_peak_locs_wlowpass);
+%{
 %% Graphs using 'smooth', 'lowpass', and 'findpeaks' functions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure; 
@@ -362,7 +362,8 @@ plot(z_1contr_gyro_peak_time_locs_wlowpass, z_1contr_gyro_peak_values_wlowpass);
 title('Z-Axis Gyroscope');
 xlim([0, 20]);
 xlabel('\bf{Time (seconds)}');
-
+%}
+%{
 %% 3D Acceleration Visualization 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % New Part: Integrate Acceleration Data to Get Orientation
@@ -432,18 +433,9 @@ zlabel('Z Position');
 cb = colorbar('eastoutside');
 colormap(jet); 
 cb.Label.String = 'Time (seconds)';
-
+%}
 %% MATLAB data to CSV for Python
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-output_folder = 'C:\Users\dirky\Desktop\OculusNew\Oculus\VrSamples\VrCubeWorld_NativeActivity\Projects\Android\csv_files_clean\';
-
-csvwrite([output_folder 'headset_acceleration_data.csv'], [time_acc, x_acc_lowpass, y_acc_lowpass, z_acc_lowpass]); % headset acc
-csvwrite([output_folder 'headset_gyroscope_data.csv'], [time_gyro, x_gyro_lowpass, y_gyro_lowpass, z_gyro_lowpass]); % headset gyro
-csvwrite([output_folder '0contr_acc_data.csv'], [time_0contr_acc, x_0contr_acc_lowpass, y_0contr_acc_lowpass, z_0contr_acc_lowpass]); % left controller acc
-csvwrite([output_folder '0contr_gyro_data.csv'], [time_0contr_gyro, x_0contr_gyro_lowpass, y_0contr_gyro_lowpass, z_0contr_gyro_lowpass]); % left controller gyro
-csvwrite([output_folder '1contr_acc_data.csv'], [time_1contr_acc, x_1contr_acc_lowpass, y_1contr_acc_lowpass, z_1contr_acc_lowpass]); % right controller acc 
-csvwrite([output_folder '1contr_gyro_data.csv'], [time_1contr_gyro, x_1contr_gyro_lowpass, y_1contr_gyro_lowpass, z_1contr_gyro_lowpass]); % right controller gyro
-
 % Ensure all arrays have the same length by trimming the longest arrays
 acc_min_length = min([length(x_acc_peak_time_locs_wlowpass), length(y_acc_peak_time_locs_wlowpass), length(z_acc_peak_time_locs_wlowpass)]);
 x_acc_peak_time_locs_wlowpass = x_acc_peak_time_locs_wlowpass(1:acc_min_length);
